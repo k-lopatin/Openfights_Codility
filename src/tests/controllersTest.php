@@ -4,14 +4,11 @@ use Silex\WebTestCase;
 
 class controllersTest extends WebTestCase
 {
-    public function testGetHomepage()
+    public function testGetCurrentBalance()
     {
-        $client = $this->createClient();
-        $client->followRedirects(true);
-        $crawler = $client->request('GET', '/');
-
-        $this->assertTrue($client->getResponse()->isOk());
-        $this->assertContains('Welcome', $crawler->filter('body')->text());
+        $currBalance = $this->app['CurrentBalanceModel'];
+        $balance = $currBalance->setCardId('42')->getCurrentBalance();
+        $this->assertEquals(52000.00, $balance, 'Incorrect balance');
     }
 
     public function createApplication()
