@@ -1,1 +1,1 @@
-# openfight_codility
+# Openfights_codility Project
